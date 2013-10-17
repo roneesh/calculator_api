@@ -39,11 +39,11 @@ describe KeyController do
     end
 
     it "returns an operator when a character is passed in as a param" do
-      operators = ["+", "-", "x", "/", "C", "AC"]
-      operators.each do |operator|
-        get :operator, {query: operator}
+      operators = {"add" => "+" , "subtract" => "-", "multiply" => "x", "divide" => "/", "C" => "C", "AC" => "AC", "decimal" => ".", "equals" => "=" }
+      operators.each_key do |key|
+        get :operator, {query: key}
         expect(response.status).to eq(200)
-        expect(response.body).to eq operator
+        expect(response.body).to eq operators[key]
       end 
     end 
 
