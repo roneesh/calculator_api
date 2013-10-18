@@ -2,13 +2,14 @@ class KeyController < ApplicationController
 
   def digit
   
-    (1..9).each do |number|
-      if params[:query] == number.to_s
-        render json: number
+    set = (1..9)
+    if set.include? params[:query].to_i
+     set.each do |number|
+        if params[:query] == number.to_s
+          render json: number
+        end
       end
-    end
-
-    if params[:query] == nil || params[:query] == ""
+    else
       render json: "Please pass in a query string parameter"
     end
 
